@@ -1,0 +1,2090 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terranova Inmobiliaria - Tu Inversión Segura en Terrenos | Buenos Aires</title>
+    <meta name="description" content="Terranova Inmobiliaria - Especialistas en terrenos en Buenos Aires. Inversión segura con acompañamiento personalizado desde la búsqueda hasta la escritura.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --azul-profundo: #0A2540;
+            --azul-marino: #003366;
+            --dorado: #D4AF37;
+            --dorado-suave: #FFC300;
+            --blanco: #FFFFFF;
+            --gris-claro: #F5F5F5;
+            --gris-texto: #666666;
+            --negro: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--negro);
+            overflow-x: hidden;
+            background-color: var(--blanco);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* 1. PANTALLA DE CARGA */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, var(--azul-profundo) 0%, var(--azul-marino) 50%, var(--dorado) 100%);
+            background-size: 100% 200%;
+            animation: gradientFlow 3s ease infinite;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 0% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        .loader-content {
+            text-align: center;
+            animation: fadeInScale 1.5s ease;
+        }
+
+        .loader-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--blanco);
+            letter-spacing: 12px;
+            text-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease forwards 0.5s;
+        }
+
+        .loader-subtitle {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 300;
+            letter-spacing: 4px;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease forwards 1s;
+        }
+
+        .loader-line {
+            width: 0;
+            height: 2px;
+            background: var(--dorado);
+            margin: 2rem auto 0;
+            animation: expandLine 1.5s ease forwards 1.2s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes expandLine {
+            to { width: 200px; }
+        }
+
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* 2. ENCABEZADO */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(10, 37, 64, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--azul-profundo);
+            text-decoration: none;
+            letter-spacing: 3px;
+        }
+
+        .logo span {
+            color: var(--dorado);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--azul-profundo);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--dorado);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--dorado);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .btn-nav {
+            background: linear-gradient(135deg, var(--dorado) 0%, #B8941F 100%);
+            color: var(--azul-profundo) !important;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 700 !important;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-nav::after {
+            display: none !important;
+        }
+
+        .btn-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            color: var(--azul-profundo) !important;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--azul-profundo);
+            cursor: pointer;
+        }
+
+        /* 3. BANNER PRINCIPAL */
+        .hero {
+            margin-top: 80px;
+            height: 100vh;
+            min-height: 700px;
+            background: linear-gradient(rgba(10, 37, 64, 0.7), rgba(0, 51, 102, 0.8)), 
+                        url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 0 2rem;
+            animation: fadeInUp 1.2s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--blanco);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, var(--dorado) 0%, #B8941F 100%);
+            color: var(--azul-profundo);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            border: 2px solid var(--dorado);
+            font-size: 0.9rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+            background: transparent;
+            color: var(--dorado);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.2rem 2.5rem;
+            background: transparent;
+            color: var(--blanco);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--blanco);
+            color: var(--azul-profundo);
+            border-color: var(--blanco);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: var(--blanco);
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* 4. SECCIÓN TERRENOS (CARRUSEL SWIPE) */
+        .terrenos {
+            padding: 6rem 5%;
+            background: var(--gris-claro);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--azul-profundo);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--dorado);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            color: var(--gris-texto);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 2rem auto 0;
+        }
+
+        .carousel-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: grab;
+        }
+
+        .carousel-track:active {
+            cursor: grabbing;
+        }
+
+        .property-card {
+            min-width: 100%;
+            padding: 0 1rem;
+            opacity: 0.5;
+            transform: scale(0.95);
+            transition: all 0.5s ease;
+        }
+
+        .property-card.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .property-inner {
+            background: var(--blanco);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(10, 37, 64, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 500px;
+        }
+
+        .property-image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .property-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .property-card:hover .property-image {
+            transform: scale(1.05);
+        }
+
+        .property-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(10,37,64,0.2), transparent);
+        }
+
+        .property-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--dorado);
+            color: var(--azul-profundo);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .property-content {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .property-content h3 {
+            font-size: 2rem;
+            color: var(--azul-profundo);
+            margin-bottom: 0.5rem;
+        }
+
+        .property-zone {
+            color: var(--dorado);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .property-specs {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .spec {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gris-texto);
+        }
+
+        .spec i {
+            color: var(--azul-profundo);
+            font-size: 1.2rem;
+        }
+
+        .spec strong {
+            color: var(--azul-profundo);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .property-description {
+            color: var(--gris-texto);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .btn-detalles {
+            align-self: flex-start;
+            background: var(--azul-profundo);
+            color: var(--blanco);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .btn-detalles:hover {
+            background: var(--dorado);
+            color: var(--azul-profundo);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .carousel-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--azul-profundo);
+            background: var(--blanco);
+            color: var(--azul-profundo);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .carousel-btn:hover {
+            background: var(--azul-profundo);
+            color: var(--blanco);
+            transform: scale(1.1);
+        }
+
+        .carousel-dots {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .dot.active {
+            background: var(--dorado);
+            width: 35px;
+            border-radius: 6px;
+        }
+
+        /* 5. DETALLE DEL TERRENO (MODAL) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 37, 64, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: var(--blanco);
+            border-radius: 20px;
+            max-width: 1000px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--blanco);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--azul-profundo);
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .modal-close:hover {
+            background: var(--dorado);
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            position: relative;
+            height: 400px;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--dorado);
+            color: var(--azul-profundo);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .modal-body {
+            padding: 3rem;
+        }
+
+        .modal-title {
+            font-size: 2.5rem;
+            color: var(--azul-profundo);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-location {
+            color: var(--gris-texto);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-location i {
+            color: var(--dorado);
+        }
+
+        .modal-details-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: var(--gris-claro);
+            border-radius: 15px;
+        }
+
+        .detail-box {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .detail-box i {
+            font-size: 2rem;
+            color: var(--azul-profundo);
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-box h4 {
+            font-size: 0.8rem;
+            color: var(--gris-texto);
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .detail-box p {
+            font-size: 1.2rem;
+            color: var(--azul-profundo);
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 300px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #eee;
+        }
+
+        .map-placeholder {
+            text-align: center;
+            color: var(--gris-texto);
+        }
+
+        .map-placeholder i {
+            font-size: 3rem;
+            color: var(--azul-profundo);
+            margin-bottom: 1rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .modal-note {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--dorado);
+            border-radius: 5px;
+            color: var(--gris-texto);
+            font-style: italic;
+        }
+
+        /* 6. CÓMO TRABAJAMOS */
+        .como-trabajamos {
+            padding: 6rem 5%;
+            background: var(--blanco);
+        }
+
+        .process-container {
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            position: relative;
+        }
+
+        .process-container::before {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--dorado), transparent);
+            z-index: 0;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-marino) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(10, 37, 64, 0.2);
+            border: 4px solid var(--blanco);
+        }
+
+        .step-number span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dorado);
+        }
+
+        .process-step h3 {
+            color: var(--azul-profundo);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .process-step p {
+            color: var(--gris-texto);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .process-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 3rem auto 0;
+            padding: 2rem;
+            background: var(--gris-claro);
+            border-radius: 15px;
+            border-left: 5px solid var(--dorado);
+        }
+
+        .process-intro p {
+            color: var(--gris-texto);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        /* 7. SECCIÓN RESERVA */
+        .reserva {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-marino) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reserva::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: rgba(212, 175, 55, 0.05);
+            border-radius: 50%;
+        }
+
+        .reserva .section-header h2,
+        .reserva .section-header p {
+            color: var(--blanco);
+        }
+
+        .reserva .section-header h2::after {
+            background: var(--dorado);
+        }
+
+        .reserva-content {
+            max-width: 900px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .reserva-info {
+            color: var(--blanco);
+        }
+
+        .reserva-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dorado);
+        }
+
+        .reserva-info p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            opacity: 0.95;
+        }
+
+        .reserva-price {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid var(--dorado);
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .reserva-price .amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dorado);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .reserva-price .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .reserva-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .reserva-features li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            opacity: 0.9;
+        }
+
+        .reserva-features li::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--dorado);
+        }
+
+        .reserva-image {
+            background: var(--blanco);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .reserva-image i {
+            font-size: 5rem;
+            color: var(--dorado);
+            margin-bottom: 1.5rem;
+        }
+
+        .reserva-image h4 {
+            color: var(--azul-profundo);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .reserva-image p {
+            color: var(--gris-texto);
+            margin-bottom: 2rem;
+        }
+
+        /* 8. SECCIÓN CONTACTO */
+        .contacto {
+            padding: 6rem 5%;
+            background: var(--gris-claro);
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            background: var(--blanco);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(10, 37, 64, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--azul-profundo);
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--gris-claro);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--dorado);
+            background: var(--blanco);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--azul-profundo) 0%, var(--azul-marino) 100%);
+            color: var(--blanco);
+            border: none;
+            border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(10, 37, 64, 0.3);
+        }
+
+        .success-message {
+            display: none;
+            background: #4CAF50;
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            text-align: center;
+            animation: slideDown 0.5s ease;
+        }
+
+        /* 9. FOOTER */
+        footer {
+            background: var(--azul-profundo);
+            color: var(--blanco);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dorado);
+        }
+
+        .footer-brand p {
+            opacity: 0.8;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section h4 {
+            color: var(--dorado);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            color: var(--dorado);
+        }
+
+        .footer-section i {
+            width: 20px;
+            color: var(--dorado);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--blanco);
+        }
+
+        .social-links a:hover {
+            background: var(--dorado);
+            color: var(--azul-profundo);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* WHATSAPP FLOAT */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.2rem;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        /* ANIMACIONES SCROLL */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .property-inner {
+                grid-template-columns: 1fr;
+            }
+            
+            .property-image-container {
+                height: 300px;
+            }
+            
+            .process-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .process-container::before {
+                display: none;
+            }
+            
+            .reserva-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--blanco);
+                flex-direction: column;
+                padding: 2rem;
+                transition: left 0.3s ease;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .modal-details-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .loader-logo {
+                font-size: 2.5rem;
+                letter-spacing: 6px;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .property-content {
+                padding: 1.5rem;
+            }
+            
+            .modal-actions {
+                flex-direction: column;
+            }
+            
+            .modal-details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. PANTALLA DE CARGA -->
+    <div id="loader">
+        <div class="loader-content">
+            <div class="loader-logo">TERRANOVA</div>
+            <div class="loader-subtitle">Inversiones en Terrenos en Buenos Aires</div>
+            <div class="loader-line"></div>
+        </div>
+    </div>
+
+    <!-- 2. ENCABEZADO -->
+    <header id="header">
+        <div class="nav-container">
+            <a href="#" class="logo">TERRA<span>NOVA</span></a>
+            
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#terrenos">Terrenos</a></li>
+                    <li><a href="#como-trabajamos">Cómo trabajamos</a></li>
+                    <li><a href="#reserva">Reserva</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#contacto" class="btn-nav">Agendar llamada</a></li>
+                </ul>
+            </nav>
+            
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 3. BANNER PRINCIPAL -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Terranova<br>Tu inversión segura en terrenos</h1>
+            <p class="hero-subtitle">Encontrá lotes con excelente proyección en Buenos Aires</p>
+            <div class="hero-buttons">
+                <a href="#contacto" class="btn-primary">
+                    <i class="fas fa-calendar-check"></i> Agendar llamada
+                </a>
+                <a href="#terrenos" class="btn-secondary">
+                    <i class="fas fa-search"></i> Ver terrenos
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- 4. SECCIÓN TERRENOS (SWIPE) -->
+    <section class="terrenos" id="terrenos">
+        <div class="section-header fade-in">
+            <h2>Nuestros Terrenos</h2>
+            <p>Desliza para explorar nuestras propiedades exclusivas en las mejores zonas de Buenos Aires</p>
+        </div>
+
+        <div class="carousel-container">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- Propiedad 1 -->
+                <div class="property-card active">
+                    <div class="property-inner">
+                        <div class="property-image-container">
+                            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Terreno Canning" class="property-image">
+                            <div class="property-overlay"></div>
+                            <span class="property-badge">Disponible</span>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-zone">Canning, Buenos Aires</div>
+                            <h3>Terreno en Canning</h3>
+                            <div class="property-specs">
+                                <div class="spec">
+                                    <i class="fas fa-ruler-combined"></i>
+                                    <div>
+                                        <strong>500 m²</strong><br>
+                                        <small>Superficie total</small>
+                                    </div>
+                                </div>
+                                <div class="spec">
+                                    <i class="fas fa-road"></i>
+                                    <div>
+                                        <strong>Asfalto</strong><br>
+                                        <small>Acceso</small>
+                                    </div>
+                                </div>
+                                <div class="spec">
+                                    <i class="fas fa-bolt"></i>
+                                    <div>
+                                        <strong>Todos</strong><br>
+                                        <small>Servicios</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="property-description">
+                                Excelente terreno en zona residencial de Canning, listo para construir. 
+                                Barrio cerrado con seguridad 24hs. Ideal para familia numerosa.
+                            </p>
+                            <button class="btn-detalles" onclick="openModal(0)">
+                                Ver detalles <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Propiedad 2 -->
+                <div class="property-card">
+                    <div class="property-inner">
+                        <div class="property-image-container">
+                            <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Terreno Nordelta" class="property-image">
+                            <div class="property-overlay"></div>
+                            <span class="property-badge">Destacado</span>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-zone">Nordelta, Tigre</div>
+                            <h3>Terreno Nordelta</h3>
+                            <div class="property-specs">
+                                <div class="spec">
+                                    <i class="fas fa-ruler-combined"></i>
+                                    <div>
+                                        <strong>800 m²</strong><br>
+                                        <small>Superficie total</small>
+                                    </div>
+                                </div>
+                                <div class="spec">
+                                    <i class="fas fa-water"></i>
+                                    <div>
+                                        <strong>Laguna</strong><br>
+                                        <small>Vista</small>
+                                    </div>
+                                </div>
+                                <div class="spec">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <div>
+                                        <strong>24hs</strong><br>
+                                        <small>Seguridad</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="property-description">
+                                Premium lote en Nordelta con vista a la laguna. Barrio cerrado con 
+                                amenities de primer nivel. Oportunidad única de inversión.
+                            </p>
+                            <button class="btn-detalles" onclick="openModal(1)">
+                                Ver detalles <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Propiedad 3 -->
+                <div class="property-card">
+                    <div class="property-inner">
+                        <div class="property-image-container">
+                            <img src="https://images.unsplash.com/photo-1464146072230-91cabc968266?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Terreno Pilar" class="property-image">
+                            <div class="property-overlay"></div>
+                            <span class="property-badge">Oferta</span>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-zone">Pilar, Buenos Aires</div>
+                            <h3>Terreno Pilar</h3>
+                            <div class="property-specs">
+                                <div class="spec">
+                                    <i class="fas fa-ruler-combined"></i>
+                                    <div>
+                                        <strong>1000 m²</strong><br>
+                                        <small>Superficie total</small>
+                                    </div>
+                                </div>
+                                <div class="spec">
+                                    <i class="fas fa-tree"></i>
+                                    <div>
+                                        <strong>Arboleda</strong><br>
+                                        <small>Entorno</small>
+                                    </div>
+                                </div>
+                                <div class="spec">
+                                    <i class="fas fa-home"></i>
+                                    <div>
+                                        <strong>Cerrado</strong><br>
+                                        <small>Barrio</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="property-description">
+                                Amplio terreno en zona en crecimiento. Ideal para inversión a largo plazo 
+                                o construcción de casa quinta. Financiación disponible.
+                            </p>
+                            <button class="btn-detalles" onclick="openModal(2)">
+                                Ver detalles <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-controls">
+                <button class="carousel-btn" onclick="moveCarousel(-1)" aria-label="Anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="carousel-dots">
+                    <button class="dot active" onclick="goToSlide(0)" aria-label="Slide 1"></button>
+                    <button class="dot" onclick="goToSlide(1)" aria-label="Slide 2"></button>
+                    <button class="dot" onclick="goToSlide(2)" aria-label="Slide 3"></button>
+                </div>
+                <button class="carousel-btn" onclick="moveCarousel(1)" aria-label="Siguiente">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. MODAL DETALLE TERRENO -->
+    <div class="modal" id="propertyModal" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="modal-header">
+                <img src="" alt="" class="modal-image" id="modalImage">
+                <span class="modal-badge" id="modalBadge">Disponible</span>
+            </div>
+            
+            <div class="modal-body">
+                <h2 class="modal-title" id="modalTitle">Título de la propiedad</h2>
+                <p class="modal-location" id="modalLocation">
+                    <i class="fas fa-map-marker-alt"></i> <span>Ubicación</span>
+                </p>
+                
+                <div class="modal-details-grid">
+                    <div class="detail-box">
+                        <i class="fas fa-ruler-combined"></i>
+                        <h4>Superficie</h4>
+                        <p id="modalSize">500 m²</p>
+                    </div>
+                    <div class="detail-box">
+                        <i class="fas fa-road"></i>
+                        <h4>Acceso</h4>
+                        <p id="modalAccess">Asfalto</p>
+                    </div>
+                    <div class="detail-box">
+                        <i class="fas fa-bolt"></i>
+                        <h4>Servicios</h4>
+                        <p id="modalServices">Luz y agua</p>
+                    </div>
+                    <div class="detail-box">
+                        <i class="fas fa-tag"></i>
+                        <h4>Precio</h4>
+                        <p id="modalPrice" style="color: var(--azul-profundo);">USD 45.000</p>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p><strong>Mapa de ubicación</strong></p>
+                        <small>Google Maps integrado</small>
+                    </div>
+                </div>
+
+                <p style="color: var(--gris-texto); margin-bottom: 1.5rem;">
+                    Nuestro equipo de Terranova te acompañará durante todo el proceso de compra, 
+                    desde la visita hasta la escritura.
+                </p>
+
+                <div class="modal-actions">
+                    <a href="#contacto" class="btn-primary" onclick="closeModal()" style="flex: 1; justify-content: center;">
+                        <i class="fas fa-calendar-check"></i> Agendar visita
+                    </a>
+                    <a href="https://wa.me/541132061109" target="_blank" class="btn-secondary" style="flex: 1; justify-content: center; border-color: var(--azul-profundo); color: var(--azul-profundo);">
+                        <i class="fab fa-whatsapp"></i> Solicitar llamada
+                    </a>
+                </div>
+
+                <div class="modal-note">
+                    <i class="fas fa-info-circle" style="color: var(--dorado); margin-right: 0.5rem;"></i>
+                    Las visitas se coordinan de lunes a sábados con cita previa.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. CÓMO TRABAJAMOS -->
+    <section class="como-trabajamos" id="como-trabajamos">
+        <div class="section-header fade-in">
+            <h2>Cómo trabajamos en Terranova</h2>
+            <p>Tres simples pasos para asegurar tu inversión</p>
+        </div>
+
+        <div class="process-container">
+            <div class="process-step fade-in">
+                <div class="step-number">
+                    <span>1</span>
+                </div>
+                <h3>Explorás</h3>
+                <p>Explorás los terrenos disponibles en nuestra web o nos contactás directamente para asesoramiento personalizado.</p>
+            </div>
+
+            <div class="process-step fade-in">
+                <div class="step-number">
+                    <span>2</span>
+                </div>
+                <h3>Visitás</h3>
+                <p>Agendamos una visita para que conozcas el lote personalmente. Te acompañamos en el recorrido.</p>
+            </div>
+
+            <div class="process-step fade-in">
+                <div class="step-number">
+                    <span>3</span>
+                </div>
+                <h3>Reservás</h3>
+                <p>Reservás tu terreno y avanzamos con la gestión. Te acompañamos hasta la escritura final.</p>
+            </div>
+        </div>
+
+        <div class="process-intro fade-in">
+            <p>
+                <i class="fas fa-quote-left" style="color: var(--dorado); margin-right: 0.5rem;"></i>
+                Terranova es una desarrolladora inmobiliaria ubicada en Buenos Aires que acompaña a cada cliente 
+                desde la búsqueda hasta la reserva del terreno.
+                <i class="fas fa-quote-right" style="color: var(--dorado); margin-left: 0.5rem;"></i>
+            </p>
+        </div>
+    </section>
+
+    <!-- 7. SECCIÓN RESERVA -->
+    <section class="reserva" id="reserva">
+        <div class="section-header fade-in">
+            <h2>Reservá tu terreno</h2>
+            <p>Asegurá tu inversión con un proceso transparente y seguro</p>
+        </div>
+
+        <div class="reserva-content">
+            <div class="reserva-info fade-in">
+                <h3>¿Cómo funciona la reserva?</h3>
+                <p>
+                    Una vez realizada la visita al terreno, si decidís avanzar, se realiza una 
+                    <strong>reserva administrativa de $59.000</strong>.
+                </p>
+                <p>
+                    Esta reserva permite bloquear el lote a tu nombre y evitar que otro comprador 
+                    avance sobre la misma unidad.
+                </p>
+                
+                <div class="reserva-price">
+                    <div class="label">Reserva administrativa</div>
+                    <div class="amount">$59.000</div>
+                </div>
+
+                <ul class="reserva-features">
+                    <li>Bloqueo inmediato del lote seleccionado</li>
+                    <li>Prioridad exclusiva durante el proceso de compra</li>
+                    <li>Acompañamiento personalizado en todo momento</li>
+                    <li>Validez de 30 días para completar la operación</li>
+                </ul>
+
+                <p style="font-style: italic; opacity: 0.9;">
+                    De esta manera aseguramos tu prioridad mientras se completa el proceso de compra.
+                </p>
+            </div>
+
+            <div class="reserva-image fade-in">
+                <i class="fas fa-file-contract"></i>
+                <h4>¿Listo para reservar?</h4>
+                <p>Contactanos para iniciar el proceso de reserva de tu terreno ideal.</p>
+                <a href="#contacto" class="btn-primary" style="width: 100%; justify-content: center;">
+                    <i class="fas fa-calendar-check"></i> Agendar visita
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. SECCIÓN CONTACTO -->
+    <section class="contacto" id="contacto">
+        <div class="section-header fade-in">
+            <h2>Hablemos de tu futuro terreno</h2>
+            <p>Completá el formulario y nos pondremos en contacto a la brevedad</p>
+        </div>
+
+        <div class="contact-container fade-in">
+            <form id="contactForm" onsubmit="handleSubmit(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Ingresá tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" required placeholder="11 1234-5678">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha">Fecha preferida</label>
+                        <input type="date" id="fecha" name="fecha" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="horario">Horario preferido</label>
+                    <select id="horario" name="horario" required>
+                        <option value="">Seleccioná un horario</option>
+                        <option value="morning">Mañana (9:00 - 12:00)</option>
+                        <option value="afternoon">Tarde (14:00 - 18:00)</option>
+                        <option value="evening">Noche (18:00 - 20:00)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="mensaje">Mensaje (opcional)</label>
+                    <textarea id="mensaje" name="mensaje" placeholder="Contanos qué tipo de terreno buscás..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i> Solicitar llamada
+                </button>
+                
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i> 
+                    <strong>¡Gracias!</strong> Nuestro equipo de Terranova se pondrá en contacto a la brevedad.
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- 9. FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>TERRANOVA</h3>
+                <p>Tu inversión segura en terrenos. Especialistas en propiedades con proyección en Buenos Aires.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://wa.me/541132061109" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contacto</h4>
+                <ul>
+                    <li>
+                        <a href="tel:+541132061109">
+                            <i class="fas fa-phone"></i> +54 11 3206-1109
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:info@terranova.com.ar">
+                            <i class="fas fa-envelope"></i> info@terranova.com.ar
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-map-marker-alt"></i> Av. Corrientes 1234, CABA
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-clock"></i> Lun a Vie: 9:00 - 18:00
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Enlaces</h4>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#terrenos">Terrenos</a></li>
+                    <li><a href="#como-trabajamos">Cómo trabajamos</a></li>
+                    <li><a href="#reserva">Reserva</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Términos y condiciones</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
+                    <li><a href="#">Matrícula CUCICBA</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Terranova Inmobiliaria. Todos los derechos reservados. | Buenos Aires, Argentina</p>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://wa.me/541132061109" class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Datos de propiedades
+        const properties = [
+            {
+                title: "Terreno en Canning",
+                location: "Canning, Buenos Aires",
+                badge: "Disponible",
+                image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                size: "500 m²",
+                access: "Asfalto",
+                services: "Todos los servicios",
+                price: "USD 45.000"
+            },
+            {
+                title: "Terreno Nordelta",
+                location: "Nordelta, Tigre",
+                badge: "Destacado",
+                image: "https://images.unsplash.com/photo-1449844908441-8829872d2607?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                size: "800 m²",
+                access: "Asfalto",
+                services: "Agua, luz, gas",
+                price: "USD 120.000"
+            },
+            {
+                title: "Terreno Pilar",
+                location: "Pilar, Buenos Aires",
+                badge: "Oferta",
+                image: "https://images.unsplash.com/photo-1464146072230-91cabc968266?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                size: "1000 m²",
+                access: "Ripio",
+                services: "Luz y agua",
+                price: "USD 65.000"
+            }
+        ];
+
+        // Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 2500);
+        });
+
+        // Mobile menu
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = mobileToggle.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileToggle.querySelector('i').classList.remove('fa-times');
+                mobileToggle.querySelector('i').classList.add('fa-bars');
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 2px 20px rgba(10, 37, 64, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(10, 37, 64, 0.1)';
+            }
+        });
+
+        // Carousel functionality
+        let currentSlide = 0;
+        const track = document.getElementById('carouselTrack');
+        const cards = document.querySelectorAll('.property-card');
+        const dots = document.querySelectorAll('.dot');
+        let isDragging = false;
+        let startPos = 0;
+        let currentTranslate = 0;
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            cards.forEach((card, index) => {
+                card.classList.toggle('active', index === currentSlide);
+            });
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function moveCarousel(direction) {
+            currentSlide = (currentSlide + direction + cards.length) % cards.length;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        // Touch events for swipe
+        track.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            startPos = e.touches[0].clientX;
+        });
+
+        track.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            const endPos = e.changedTouches[0].clientX;
+            const diff = endPos - startPos;
+            
+            if (Math.abs(diff) > 50) {
+                moveCarousel(diff > 0 ? -1 : 1);
+            }
+        });
+
+        // Mouse drag events
+        track.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startPos = e.clientX;
+            track.style.cursor = 'grabbing';
+        });
+
+        track.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            track.style.cursor = 'grab';
+            const endPos = e.clientX;
+            const diff = endPos - startPos;
+            
+            if (Math.abs(diff) > 50) {
+                moveCarousel(diff > 0 ? -1 : 1);
+            }
+        });
+
+        track.addEventListener('mouseleave', () => {
+            isDragging = false;
+            track.style.cursor = 'grab';
+        });
+
+        // Modal functionality
+        function openModal(index) {
+            const modal = document.getElementById('propertyModal');
+            const prop = properties[index];
+            
+            document.getElementById('modalImage').src = prop.image;
+            document.getElementById('modalTitle').textContent = prop.title;
+            document.getElementById('modalLocation').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${prop.location}`;
+            document.getElementById('modalBadge').textContent = prop.badge;
+            document.getElementById('modalSize').textContent = prop.size;
+            document.getElementById('modalAccess').textContent = prop.access;
+            document.getElementById('modalServices').textContent = prop.services;
+            document.getElementById('modalPrice').textContent = prop.price;
+            
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('propertyModal');
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        document.getElementById('propertyModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('propertyModal')) {
+                closeModal();
+            }
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Form submission
+        function handleSubmit(e) {
+            e.preventDefault();
+            const successMsg = document.getElementById('successMessage');
+            const form = document.getElementById('contactForm');
+            
+            // Simulate form submission
+            successMsg.style.display = 'block';
+            form.reset();
+            
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 5000);
+
+            // Here you would normally send data to server
+            console.log('Form submitted');
+        }
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Auto-advance carousel
+        setInterval(() => {
+            if (!isDragging) {
+                moveCarousel(1);
+            }
+        }, 6000);
+
+        // Set minimum date for date input
+        const dateInput = document.getElementById('fecha');
+        if (dateInput) {
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.setAttribute('min', today);
+        }
+    </script>
+</body>
+</html>
